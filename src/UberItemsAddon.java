@@ -1,5 +1,4 @@
-import items.empty_item;
-import items.example_uber_item;
+import items.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -11,6 +10,7 @@ import thirtyvirus.uber.helpers.UberAbility;
 import thirtyvirus.uber.helpers.UberCraftingRecipe;
 import thirtyvirus.uber.helpers.UberRarity;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -68,22 +68,150 @@ public class UberItemsAddon extends JavaPlugin {
         UberItems.putItem("empty_item", new empty_item(Material.DIAMOND, "Empty UberItem", UberRarity.COMMON,
                 false, false, false, Collections.emptyList(), null));
 
-        UberItems.putItem("example_uber_item", new example_uber_item(Material.WOODEN_SHOVEL, "Example Uber Item",
-                UberRarity.UNFINISHED, false, false, true,
+        UberItems.putItem("sword_of_saturation", new sword_of_saturation(Material.GOLDEN_SWORD, "Sword Of Saturation", UberRarity.RARE,
+                false, false, true,
                 Arrays.asList(
-                        new UberAbility("Example Ability", AbilityType.NONE, "Adds an enchantment glint to items when they are clicked onto this item in the inventory... because why not? xD"),
-                        new UberAbility("Cooldown Demonstration", AbilityType.LEFT_CLICK, "Makes a sound? Idk you can only do it once every 5 seconds", 5),
-                        new UberAbility("Midas Step", AbilityType.RIGHT_CLICK, "(toggle) every block you step on turns into gold while holding this item")),
+                        new UberAbility("Saturate", AbilityType.RIGHT_CLICK, "Regen all your hunger.", 20),
+                        new UberAbility("", AbilityType.NONE, "")),
                 new UberCraftingRecipe(Arrays.asList(
-                        UberItems.getMaterial("enchanted_chest").makeItem(1),
-                        UberItems.getMaterial("enchanted_diamond").makeItem(1),
-                        UberItems.getMaterial("enchanted_chest").makeItem(1),
                         new ItemStack(Material.AIR),
-                        new ItemStack(Material.STICK, 8),
+                        new ItemStack(Material.COOKED_PORKCHOP, 64),
                         new ItemStack(Material.AIR),
                         new ItemStack(Material.AIR),
-                        new ItemStack(Material.STICK, 8),
-                        new ItemStack(Material.AIR)), false, 1)));
+                        new ItemStack(Material.COOKED_PORKCHOP, 64),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.STICK),
+                        new ItemStack(Material.AIR)), false, 1 )));
+
+        UberItems.putItem("guitar", new guitar(Material.WOODEN_SWORD, "Guitar", UberRarity.COMMON,
+                false, false, true,
+                Arrays.asList(
+                        new UberAbility("Bass Note", AbilityType.LEFT_CLICK, "Play the bass note."),
+                        new UberAbility("Chime Note", AbilityType.RIGHT_CLICK, "Play the chime note.")),
+                new UberCraftingRecipe(Arrays.asList(
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.STICK),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.STRING),
+                        new ItemStack(Material.OAK_PLANKS),
+                        new ItemStack(Material.STRING),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.OAK_PLANKS),
+                        new ItemStack(Material.AIR)), false, 1 )));
+
+        UberItems.putItem("hyperion", new hyperion(Material.IRON_SWORD, "Hyperion", UberRarity.RARE,
+                false, false, true,
+                Arrays.asList(
+                        new UberAbility("Wither Impact", AbilityType.RIGHT_CLICK, "Kill everything in your path!"),
+                        new UberAbility("", AbilityType.NONE, "")),
+                new UberCraftingRecipe(Arrays.asList(
+                        new ItemStack(Material.AIR),
+                        UberItems.getMaterial("enchanted_iron_block").makeItem(1),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        UberItems.getMaterial("enchanted_iron_block").makeItem(1),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        UberItems.getMaterial("thunderlord_handle").makeItem(1),
+                        new ItemStack(Material.AIR)), false, 1 )));
+
+        UberItems.putItem("block_annihilator", new block_annihilator(Material.NETHERITE_PICKAXE, "Block Annihilator", UberRarity.RARE,
+                false, false, true,
+                Arrays.asList(
+                        new UberAbility("Block-be-Gone", AbilityType.RIGHT_CLICK, "Instantly break blocks."),
+                        new UberAbility("Ore Compactor", AbilityType.NONE, "Turn ores into their block form!")),
+                new UberCraftingRecipe(Arrays.asList(
+                        new ItemStack(Material.NETHERITE_BLOCK),
+                        new ItemStack(Material.NETHERITE_BLOCK),
+                        new ItemStack(Material.NETHERITE_BLOCK),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.STICK),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.STICK),
+                        new ItemStack(Material.AIR)), false, 1 )));
+
+        UberItems.putItem("golden_head", new golden_head(Material.GHAST_TEAR, "Golden Head", UberRarity.RARE,
+                false, true, true,
+                Arrays.asList(
+                        new UberAbility("", AbilityType.NONE, ""),
+                        new UberAbility("", AbilityType.NONE, "")),
+                new UberCraftingRecipe(Arrays.asList(
+                        new ItemStack(Material.GOLD_INGOT),
+                        new ItemStack(Material.GOLD_INGOT),
+                        new ItemStack(Material.GOLD_INGOT),
+                        new ItemStack(Material.GOLD_INGOT),
+                        new ItemStack(Material.PLAYER_HEAD),
+                        new ItemStack(Material.GOLD_INGOT),
+                        new ItemStack(Material.GOLD_INGOT),
+                        new ItemStack(Material.GOLD_INGOT),
+                        new ItemStack(Material.GOLD_INGOT)), false, 1 )));
+
+        UberItems.putItem("nuke", new nuke(Material.TNT, "Nuke", UberRarity.RARE,
+                true, true, true,
+                Arrays.asList(
+                        new UberAbility("", AbilityType.NONE, ""),
+                        new UberAbility("", AbilityType.NONE, "")),
+                new UberCraftingRecipe(Arrays.asList(
+                        new ItemStack(Material.TNT),
+                        new ItemStack(Material.TNT),
+                        new ItemStack(Material.TNT),
+                        new ItemStack(Material.TNT),
+                        new ItemStack(Material.TNT),
+                        new ItemStack(Material.TNT),
+                        new ItemStack(Material.TNT),
+                        new ItemStack(Material.TNT),
+                        new ItemStack(Material.TNT)), false, 1 )));
+
+        UberItems.putItem("creeper_charge", new creeper_charge(Material.FIRE_CHARGE, "Creeper Charge", UberRarity.RARE,
+                true, true, true,
+                Arrays.asList(
+                        new UberAbility("", AbilityType.NONE, ""),
+                        new UberAbility("", AbilityType.NONE, "")),
+                new UberCraftingRecipe(Arrays.asList(
+                        new ItemStack(Material.TNT),
+                        new ItemStack(Material.FLINT),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR)), false, 1 )));
+
+        UberItems.putItem("ice_weapon", new ice_weapon(Material.BLAZE_ROD, "Ice Weapon", UberRarity.UNCOMMON,
+                false, false, true,
+                Arrays.asList(
+                        new UberAbility("Freeze", AbilityType.NONE, "Freeze mobs on hit."),
+                        new UberAbility("", AbilityType.NONE, "")),
+                new UberCraftingRecipe(Arrays.asList(
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.ICE),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.ICE),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.PRISMARINE_SHARD),
+                        new ItemStack(Material.AIR)), false, 1 )));
+
+        UberItems.putItem("cum_sword", new cum_sword(Material.IRON_SWORD, "Cum Sword", UberRarity.COMMON,
+                false, false, true,
+                Arrays.asList(
+                        new UberAbility("Cum-splotion!", AbilityType.NONE, "Cum on your enemies!"),
+                        new UberAbility("", AbilityType.NONE, "")),
+                new UberCraftingRecipe(Arrays.asList(
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.QUARTZ_BLOCK),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.QUARTZ_BLOCK),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.STICK),
+                        new ItemStack(Material.AIR)), false, 1 )));
+
     }
     private void registerUberMaterials() {
         UberItems.putMaterial("enchanted_sponge", new UberMaterial(Material.SPONGE,
@@ -98,6 +226,34 @@ public class UberItemsAddon extends JavaPlugin {
                         new ItemStack(Material.SPONGE, 32),
                         new ItemStack(Material.AIR),
                         new ItemStack(Material.SPONGE, 32),
+                        new ItemStack(Material.AIR)), false, 1)));
+
+        UberItems.putMaterial("enchanted_iron_block", new UberMaterial(Material.IRON_BLOCK,
+                "Enchanted Iron Block", UberRarity.RARE, true, true, false,
+                "A very compact iron block.",
+                new UberCraftingRecipe(Arrays.asList(
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.IRON_BLOCK, 16),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.IRON_BLOCK, 16),
+                        new ItemStack(Material.IRON_BLOCK, 16),
+                        new ItemStack(Material.IRON_BLOCK, 16),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.IRON_BLOCK, 16),
+                        new ItemStack(Material.AIR)), false, 1)));
+
+        UberItems.putMaterial("thunderlord_handle", new UberMaterial(Material.STICK,
+                "Thunderlord Handle", UberRarity.RARE, true, false, false,
+                "Only the strongest can obtain this handle. Use at your own risk.",
+                new UberCraftingRecipe(Arrays.asList(
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.CREEPER_HEAD),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.AIR),
+                        new ItemStack(Material.BLAZE_ROD, 16),
                         new ItemStack(Material.AIR)), false, 1)));
     }
 }
